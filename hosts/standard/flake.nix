@@ -7,7 +7,7 @@
     home-manager.inputs.nixpkgs.follows = "nixpkgs";
   };
 
-  outputs = { config, home-manager, nixpkgs, ... }:
+  outputs = { nixpkgs, home-manager, ... }:
     let
       system = "x86_64-linux";
     in {
@@ -16,7 +16,6 @@
         modules = [
           ./configuration.nix
           home-manager.nixosModules.home-manager
-          { home-manager.users."${config.var.username}" = import ./home.nix; }
         ];
       };
     };
