@@ -1,7 +1,7 @@
 { config, pkgs, ... }: {
   imports = [
     ./hardware-configuration.nix
-    ../../modules/networkix.nix
+    ../../modules/networks.nix
     ../../modules/users.nix
   ];
 
