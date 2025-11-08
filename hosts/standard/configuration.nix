@@ -12,5 +12,10 @@
   environment.systemPackages = with pkgs; [
   ];
 
-  home-manager.users."${config.var.username}" = import ./home.nix;
+  let
+    usernames = builtins.attrNames config.users.users;
+    username = builtins.head usernames;
+  in {
+    home-manager.users."${username}" = import ./home.nix;
+  };
 }
