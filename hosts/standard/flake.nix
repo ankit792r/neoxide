@@ -7,15 +7,15 @@
     home-manager.inputs.nixpkgs.follows = "nixpkgs";
   };
 
-  outputs = { config, nixpkgs, ... }:
+  outputs = { config, home-manager, nixpkgs, ... }:
     let
       system = "x86_64-linux";
     in {
       nixosConfigurations.standard = nixpkgs.lib.nixosSystem {
         inherit system;
         modules = [
-          home-manager.nixosModules.home-manager
           ./configuration.nix
+          home-manager.nixosModules.home-manager
           { home-manager.users."${config.var.username}" = import ./home.nix; }
         ];
       };
