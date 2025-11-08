@@ -1,8 +1,8 @@
 { pkgs, ... }: {
 
   home = {
-    username = "${config.var.username}";
-    homeDirectory = "/home/${config.var.username}";
+    username = "ankit";
+    homeDirectory = "/home/ankit";
     packages = with pkgs; [
       neovim
       htop
@@ -13,7 +13,7 @@
   programs = {
     git = {
       enable = true;
-      userName = "${config.var.username}";
+      userName = "ankit";
       # userEmail = "";
     };
   };
