@@ -1,5 +1,5 @@
 {
-  description = "Standard NixOS profile flake";
+  description = "Minimal NixOS profile flake";
 
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-25.05";
@@ -11,7 +11,7 @@
     let
       system = "x86_64-linux";
     in {
-      nixosConfigurations.standard = nixpkgs.lib.nixosSystem {
+      nixosConfigurations.minimal = nixpkgs.lib.nixosSystem {
         inherit system;
         modules = [
           ./configuration.nix

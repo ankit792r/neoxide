@@ -7,7 +7,6 @@
         user = "ankit";
         home = "/home/ankit";
 
-
         git = {
             name = "ankit";
             email = "ankit@example.com";
