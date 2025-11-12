@@ -4,7 +4,6 @@
     ../../modules/boot.nix
     ../../modules/networks.nix
     ../../modules/users.nix
-    ./variables.nix
   ];
 
   nix.settings.experimental-features = [ "nix-command" "flakes" ];
