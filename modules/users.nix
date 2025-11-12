@@ -1,5 +1,5 @@
 { config, pkgs, ... }: {
-  users.users."${config.var.username}" = {
+  users.users.ankit = {
     isNormalUser = true;
     description = "main non root user";
     extraGroups = [ "networkmanager" "input" "wheel" "video" "audio" "tss" ];

@@ -11,7 +11,7 @@
 
   environment.systemPackages = with pkgs; [];
 
-  home-manager.users."${config.var.username}" = import ./home.nix;
+  home-manager.users.ankit = import ./home.nix;
   
   system.stateVersion = "25.05";
 }
