@@ -34,7 +34,6 @@
     
     # File manager
     nautilus
-    thunar
     
     # Image viewer
     feh
