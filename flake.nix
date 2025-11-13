@@ -1,15 +1,54 @@
 {
-  description = "Main flake that imports minimal and standard profiles";
-  inputs = {
-    nixpkgs.url = "github:NixOS/nixpkgs/nixos-25.05";
-    minimal.url = "path:./hosts/minimal";
-    standard.url = "path:./hosts/standard";
-  };
+  description = "Modular NixOS configuration with flakes and Home Manager";
 
-  outputs = { self, nixpkgs, minimal, standard, ... }: {
-    nixosConfigurations = {
-      minimal = minimal.nixosConfigurations.minimal;
-      standard = standard.nixosConfigurations.standard;
+  inputs = {
+    nixpkgs.url = "github:NixOS/nixpkgs/nixos-24.11";
+    home-manager = {
+      url = "github:nix-community/home-manager/release-24.11";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+    niri = {
+      url = "github:YaLTeR/niri";
+      inputs.nixpkgs.follows = "nixpkgs";
     };
   };
+
+  outputs = { self, nixpkgs, home-manager, niri, ... }@inputs:
+    let
+      system = "x86_64-linux";
+      pkgs = import nixpkgs {
+        inherit system;
+        config.allowUnfree = true;
+      };
+    in
+    {
+      nixosConfigurations = {
+        minimal = nixpkgs.lib.nixosSystem {
+          inherit system;
+          specialArgs = { inherit inputs; };
+          modules = [
+            ./hosts/minimal/configuration.nix
+            home-manager.nixosModules.home-manager
+            {
+              home-manager.useGlobalPkgs = true;
+              home-manager.useUserPackages = true;
+              home-manager.extraSpecialArgs = { inherit inputs; };
+            }
+          ];
+        };
+        standard = nixpkgs.lib.nixosSystem {
+          inherit system;
+          specialArgs = { inherit inputs; };
+          modules = [
+            ./hosts/standard/configuration.nix
+            home-manager.nixosModules.home-manager
+            {
+              home-manager.useGlobalPkgs = true;
+              home-manager.useUserPackages = true;
+              home-manager.extraSpecialArgs = { inherit inputs; };
+            }
+          ];
+        };
+      };
+    };
 }

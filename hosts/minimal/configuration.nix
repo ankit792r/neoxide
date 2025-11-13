@@ -1,16 +1,20 @@
-{ config, pkgs, ... }: {
+{ config, pkgs, inputs, ... }: {
   imports = [
-    ./hardware-configuration.nix
+    # Hardware configuration (generated, may not exist)
+    # ./hardware-configuration.nix
+    
+    # Core modules
+    ../../modules/nix.nix
     ../../modules/boot.nix
     ../../modules/networks.nix
     ../../modules/users.nix
+    
+    # Essential modules for minimal host
+    ../../modules/packages.nix
+    ../../modules/services.nix
+    ../../modules/tty.nix
   ];
 
-  nix.settings.experimental-features = [ "nix-command" "flakes" ];
-
-  environment.systemPackages = with pkgs; [];
-  
-  home-manager.users.ankit = import ./home.nix;
-  
-  system.stateVersion = "25.05";
+  # Minimal host - TTY only with essential services
+  # No graphical environment
 }
