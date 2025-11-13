@@ -37,6 +37,8 @@
     fontDir.enable = true;
     packages = with pkgs; [
       noto-fonts
+      font-awesome
+      fira-code
     ];
   };
 }
