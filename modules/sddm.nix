@@ -37,14 +37,6 @@
     fontDir.enable = true;
     packages = with pkgs; [
       noto-fonts
-      noto-fonts-cjk
-      noto-fonts-emoji
-      font-awesome
-      dejavu_fonts
-      liberation_ttf
-      fira-code
-      fira-code-symbols
-      nerdfonts
     ];
   };
 }
