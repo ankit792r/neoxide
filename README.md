@@ -167,7 +167,7 @@ sudo nixos-rebuild switch --flake .#standard
 
 ## Notes
 
-- The configuration uses `nixos-24.11` and `home-manager release-24.11`
+- The configuration uses `nixos-25.05` and `home-manager release-25.05`
 - Hardware-specific configuration should be placed in `hosts/*/hardware-configuration.nix`
 - User name is set to `ankit` - change in `modules/users.nix` and home.nix files
 - Some packages may require `allowUnfree = true` (already set in flake.nix)

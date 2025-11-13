@@ -3,7 +3,7 @@
   home = {
     username = "ankit";
     homeDirectory = "/home/ankit";
-    stateVersion = "24.11";
+    stateVersion = "25.05";
   };
 
   # Essential packages for minimal TTY setup
