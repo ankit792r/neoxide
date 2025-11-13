@@ -46,13 +46,8 @@
     mpv
     vlc
     
-    # Text editors
-    gedit
-    code
-    
     # Browsers
     firefox
-    chromium
     
     # Terminal emulators
     alacritty
@@ -61,24 +56,10 @@
     
     # System tools
     pavucontrol
-    networkmanagerapplet
     blueman
     
     # Development tools
     vscode
-    jetbrains.idea-community
-    
-    # Office suite
-    libreoffice
-    
-    # Archive tools with GUI
-    file-roller
-    
-    # Calculator
-    gnome-calculator
-    
-    # System monitor
-    gnome-system-monitor
   ];
 
   # XDG portal integration
