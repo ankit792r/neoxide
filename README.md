@@ -60,6 +60,7 @@ All modules in the `modules/` directory are pluggable and can be enabled/disable
 ### Core Modules
 - `nix.nix`: Nix settings and garbage collection
 - `boot.nix`: Boot loader configuration
+- `filesystem.nix`: Filesystem configuration template (use hardware-configuration.nix instead)
 - `networks.nix`: Network configuration (iwd)
 - `users.nix`: User accounts and groups
 
@@ -127,7 +128,42 @@ SDDM is configured to work with Wayland. The niri session should be available in
 ## Requirements
 
 - NixOS with flakes enabled
-- Hardware configuration file (optional, can be generated with `nixos-generate-config`)
+- **Hardware configuration file (REQUIRED)** - must be generated before building
+
+## Initial Setup
+
+### Step 1: Generate Hardware Configuration
+
+**IMPORTANT**: You must generate the hardware configuration file before building. This file contains your filesystem definitions (including root filesystem) and is required to fix the "FileSystem options does not specify your root file system" error.
+
+```bash
+# For standard host
+sudo nixos-generate-config --dir hosts/standard/
+
+# For minimal host
+sudo nixos-generate-config --dir hosts/minimal/
+```
+
+This will create `hardware-configuration.nix` in the respective host directory.
+
+### Step 2: Uncomment Hardware Configuration Import
+
+After generating the hardware-configuration.nix file, uncomment the import line in your host's `configuration.nix`:
+
+```nix
+imports = [
+  ./hardware-configuration.nix  # Uncomment this line
+  # ... other imports
+];
+```
+
+### Step 3: Build and Switch
+
+Now you can build and switch:
+
+```bash
+sudo nixos-rebuild switch --flake .#standard
+```
 
 ## Notes
 
@@ -138,7 +174,15 @@ SDDM is configured to work with Wayland. The niri session should be available in
 
 ## Troubleshooting
 
-1. **Niri not starting**: Check that niri package is available and SDDM is configured for Wayland
-2. **Missing packages**: Run `nix flake update` to update inputs
-3. **Build errors**: Check that all module imports are correct and hardware-configuration.nix exists if referenced
+1. **"FileSystem options does not specify your root file system" error**:
+   - This means you haven't generated or imported `hardware-configuration.nix`
+   - Run: `sudo nixos-generate-config --dir hosts/<host>/`
+   - Uncomment the `./hardware-configuration.nix` import in your host's `configuration.nix`
+   - Rebuild: `sudo nixos-rebuild switch --flake .#<host>`
+
+2. **Niri not starting**: Check that niri package is available and SDDM is configured for Wayland
+
+3. **Missing packages**: Run `nix flake update` to update inputs
+
+4. **Build errors**: Check that all module imports are correct and hardware-configuration.nix is imported
 
