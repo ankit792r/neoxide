@@ -1,6 +1,7 @@
 { pkgs, ... }:
 
 {
+  nixpkgs.config.allowUnfree = true;
   # Essential system packages
   environment.systemPackages = with pkgs; [
     # Core utilities
