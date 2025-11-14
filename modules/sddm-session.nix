@@ -1,4 +1,4 @@
-{ config, pkgs, ... }:
+{ config, pkgs, inputs, ... }:
 
 {
   # Create SDDM session file for niri
@@ -13,11 +13,10 @@
         [Desktop Entry]
         Name=Niri
         Comment=Niri Wayland Compositor
-        Exec=niri
+        Exec=${inputs.niri.packages.${pkgs.system}.default}/bin/niri
         Type=Application
         DesktopNames=niri
       '';
     })
   ];
 }
-

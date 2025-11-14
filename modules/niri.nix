@@ -6,8 +6,8 @@
   # This module provides system-level packages needed for niri
   
   environment.systemPackages = with pkgs; [
-    # Niri window manager
-    inputs.niri.packages.${pkgs.system}.niri
+    # Niri window manager - use the flake input
+    inputs.niri.packages.${pkgs.system}.default
     
     # Wayland compositor essentials
     wayland
@@ -29,4 +29,3 @@
     xdg-desktop-portal-wlr
   ];
 }
-

@@ -15,11 +15,11 @@
       options = "--delete-older-than 30d";
     };
     
-    # Enable nix flakes
-    package = pkgs.nixVersions.stable;
+    # Enable nix flakes - use latest unstable nix
+    package = pkgs.nix;
   };
 
-  # NixOS configuration
-  system.stateVersion = "25.05";
+  # NixOS configuration - use current stable version
+  # Update this when you upgrade to a new NixOS release
+  system.stateVersion = "24.11";
 }
-

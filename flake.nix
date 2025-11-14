@@ -2,11 +2,16 @@
   description = "Modular NixOS configuration with flakes and Home Manager";
 
   inputs = {
-    nixpkgs.url = "github:NixOS/nixpkgs/nixos-25.05";
+    # Use nixos-unstable for latest packages
+    nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
+    
+    # Home Manager from unstable branch
     home-manager = {
-      url = "github:nix-community/home-manager/release-25.05";
+      url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    
+    # Niri window manager - ensure it follows nixpkgs
     niri = {
       url = "github:YaLTeR/niri";
       inputs.nixpkgs.follows = "nixpkgs";

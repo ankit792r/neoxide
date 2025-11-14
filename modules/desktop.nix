@@ -2,32 +2,19 @@
 
 {
   # Desktop environment packages and utilities
+  # Note: Core wayland packages are in niri.nix to avoid duplication
   
   environment.systemPackages = with pkgs; [
     # Desktop utilities
     xdg-utils
     xdg-desktop-portal
     xdg-desktop-portal-gtk
-    xdg-desktop-portal-wlr
-    
-    # Wayland utilities
-    wayland
-    wayland-protocols
-    wayland-utils
     
     # Application launcher
     rofi-wayland
     
     # Status bar
     waybar
-    
-    # Screenshot tools
-    grim
-    slurp
-    wl-clipboard
-    
-    # Background
-    swaybg
     
     # Notification daemon
     mako
@@ -57,9 +44,6 @@
     # System tools
     pavucontrol
     blueman
-    
-    # Development tools
-    vscode
   ];
 
   # XDG portal integration
@@ -71,4 +55,3 @@
     ];
   };
 }
-
