@@ -11,7 +11,7 @@
     xdg-desktop-portal-gtk
     
     # Application launcher
-    rofi-wayland
+    rofi
     
     # Status bar
     waybar
