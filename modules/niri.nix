@@ -1,13 +1,21 @@
 { config, pkgs, inputs, ... }:
 
+let
+  # Try to use niri from flake, fallback to nixpkgs if unavailable
+  niriPackage = 
+    if inputs ? niri && inputs.niri.packages ? ${pkgs.system} then
+      (inputs.niri.packages.${pkgs.system}.niri or inputs.niri.packages.${pkgs.system}.default)
+    else
+      pkgs.niri;
+in
 {
   # Niri window manager system packages
   # Note: Niri configuration is done via Home Manager xdg.configFile
   # This module provides system-level packages needed for niri
   
   environment.systemPackages = with pkgs; [
-    # Niri window manager - use the flake input
-    inputs.niri.packages.${pkgs.system}.default
+    # Niri window manager
+    niriPackage
     
     # Wayland compositor essentials
     wayland

@@ -1,5 +1,13 @@
 { config, pkgs, inputs, ... }:
 
+let
+  # Get niri binary path with fallback
+  niriPath = 
+    if inputs ? niri && inputs.niri.packages ? ${pkgs.system} then
+      "${(inputs.niri.packages.${pkgs.system}.niri or inputs.niri.packages.${pkgs.system}.default)}/bin/niri"
+    else
+      "${pkgs.niri}/bin/niri";
+in
 {
   # Create SDDM session file for niri
   # This ensures niri appears as a session option in SDDM
@@ -13,7 +21,7 @@
         [Desktop Entry]
         Name=Niri
         Comment=Niri Wayland Compositor
-        Exec=${inputs.niri.packages.${pkgs.system}.default}/bin/niri
+        Exec=${niriPath}
         Type=Application
         DesktopNames=niri
       '';

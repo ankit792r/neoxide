@@ -1,8 +1,12 @@
-{ config, pkgs, inputs, ... }: {
+{ config, pkgs, inputs, ... }:
+{
   imports = [
     # Hardware configuration (REQUIRED - generate with: sudo nixos-generate-config --dir hosts/standard/)
     # Uncomment the line below after generating hardware-configuration.nix
     ./hardware-configuration.nix
+    
+    # Hyper-V guest support (uncomment if running in Hyper-V)
+    ../../modules/hyperv.nix
     
     # Core modules
     ../../modules/nix.nix
