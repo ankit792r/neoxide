@@ -1,11 +1,12 @@
-{ config, pkgs, ... }:
+{ config, pkgs, inputs, ... }:
 
 {
   # Hyper-V guest configuration
   # This module should be imported when running NixOS in Hyper-V
   
   imports = [
-    <nixpkgs/nixos/modules/virtualisation/hyperv-guest.nix>
+    # Reference the hyperv-guest module from nixpkgs input (flake-compatible)
+    "${inputs.nixpkgs}/nixos/modules/virtualisation/hyperv-guest.nix"
   ];
 
   # Enable Hyper-V guest support
